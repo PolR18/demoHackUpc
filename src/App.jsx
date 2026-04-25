@@ -375,7 +375,6 @@ function DistrictNode({ data }) {
         boxShadow: `0 0 30px ${data.color}35`,
       }}
     >
-      <Handle type="target" position={Position.Top} />
       <div className="district-icon" style={{ background: data.color }}>
         <Icon size={22} />
       </div>
@@ -383,25 +382,13 @@ function DistrictNode({ data }) {
         <div className="district-title">{data.title}</div>
         <div className="district-subtitle">{data.subtitle}</div>
       </div>
-      <Handle type="source" position={Position.Bottom} />
     </div>
   );
 }
 
 const nodeTypes = { district: DistrictNode };
 
-const initialEdges = [
-  { id: "e1", source: "gateway", target: "customers", animated: true },
-  { id: "e2", source: "gateway", target: "visits", animated: true },
-  { id: "e3", source: "gateway", target: "vets", animated: true },
-  { id: "e4", source: "gateway", target: "genai", animated: true },
-  { id: "e5", source: "monitoring", target: "gateway", animated: true },
-  { id: "e6", source: "monitoring", target: "customers", animated: true },
-  { id: "e7", source: "monitoring", target: "visits", animated: true },
-  { id: "e8", source: "monitoring", target: "vets", animated: true },
-  { id: "e9", source: "discovery", target: "gateway", animated: true },
-  { id: "e10", source: "config", target: "gateway", animated: true },
-];
+const initialEdges = [];
 
 export default function App() {
   const [role, setRole] = useState(null);
@@ -644,7 +631,7 @@ export default function App() {
             fitView
             fitViewOptions={{ padding: 1.2 }}
           >
-            <Background gap={24} size={1} />
+            <Background variant="dots" gap={24} size={1} color="#94a3b8" />
             <Controls orientation="horizontal" position="bottom-center" />
           </ReactFlow>
         </div>

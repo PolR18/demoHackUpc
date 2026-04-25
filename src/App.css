@@ -1,6 +1,6 @@
 :root {
-  --bg-app: #f5f7fb;
-  --bg-canvas: #edf1f9;
+  --bg-app: #ffffff;
+  --bg-canvas: #ffffff;
   --bg-sidebar: rgba(255, 255, 255, 0.08);
   --bg-panel: rgba(255, 255, 255, 0.12);
   --bg-node: #ffffff;
@@ -52,12 +52,12 @@ body {
   left: 24px;
   top: 24px;
   bottom: 24px;
-  width: 320px;
+  width: 260px;
   padding: 28px 24px;
   background: var(--bg-sidebar);
   backdrop-filter: blur(24px) saturate(160%);
   -webkit-backdrop-filter: blur(24px) saturate(160%);
-  border: 1px solid rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 24px;
   box-shadow: none;
   display: flex;
@@ -148,11 +148,11 @@ body {
 }
 
 .role-card:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(0, 0, 0, 0.03);
 }
 
 .role-card.active {
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(0, 0, 0, 0.05);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
 }
 
@@ -193,12 +193,7 @@ body {
   position: absolute;
   inset: 0;
   z-index: 1;
-  background:
-    radial-gradient(circle at 50% 30%, rgba(37, 99, 235, 0.04), transparent 50%),
-    linear-gradient(rgba(148, 163, 184, 0.15) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(148, 163, 184, 0.15) 1px, transparent 1px),
-    var(--bg-canvas);
-  background-size: auto, 24px 24px, 24px 24px;
+  background: var(--bg-canvas);
   display: flex;
   flex-direction: column;
 }
@@ -363,7 +358,7 @@ body {
   background: var(--bg-panel);
   backdrop-filter: blur(24px) saturate(160%);
   -webkit-backdrop-filter: blur(24px) saturate(160%);
-  border: 1px solid rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 24px;
   box-shadow: none;
   display: flex;
