@@ -10,37 +10,49 @@ const PORT = 3001;
 const BASE_PATH = "/Users/polr/Documents/Github/spring-petclinic-microservices-main";
 
 app.use(cors());
+app.use(express.json());
 
-app.get("/open", (req, res) => {
-  const relativePath = req.query.path;
-
-  if (!relativePath) {
-    return res.status(400).json({ error: "Missing path" });
-  }
-
-  const absolutePath = path.join(BASE_PATH, relativePath);
+function safeAbsolutePath(relativePath) {
+  const absolutePath = path.resolve(BASE_PATH, relativePath);
 
   if (!absolutePath.startsWith(BASE_PATH)) {
-    return res.status(403).json({ error: "Invalid path" });
+    throw new Error("Invalid path");
   }
 
   if (!fs.existsSync(absolutePath)) {
-    return res.status(404).json({
-      error: "File not found",
-      path: absolutePath,
-    });
+    throw new Error(`File not found: ${absolutePath}`);
   }
 
-  exec(`open "${absolutePath}"`, (error) => {
-    if (error) {
-      return res.status(500).json({ error: error.message });
-    }
+  return absolutePath;
+}
 
-    res.json({
-      ok: true,
-      opened: absolutePath,
+app.post("/open-many", (req, res) => {
+  const paths = req.body.paths;
+
+  if (!Array.isArray(paths) || paths.length === 0) {
+    return res.status(400).json({ error: "Missing paths" });
+  }
+
+  try {
+    const absolutePaths = paths.map(safeAbsolutePath);
+
+    const command = `open ${absolutePaths
+      .map((p) => `"${p.replaceAll('"', '\\"')}"`)
+      .join(" ")}`;
+
+    exec(command, (error) => {
+      if (error) {
+        return res.status(500).json({ error: error.message });
+      }
+
+      res.json({
+        ok: true,
+        opened: absolutePaths,
+      });
     });
-  });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
 });
 
 app.listen(PORT, () => {

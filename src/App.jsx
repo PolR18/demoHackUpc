@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import ReactFlow, {
   Background,
   Controls,
@@ -16,11 +16,12 @@ import {
   HelpCircle,
   ChevronsLeft,
   ChevronsRight,
+  Server,
+  Activity,
+  Settings,
+  Network,
 } from "lucide-react";
 import "./App.css";
-
-const LOCAL_OPEN_SERVER = "http://localhost:3001/open";
-const GITHUB_BASE = " ";
 
 const ROLE_CONFIG = {
   accountant: {
@@ -45,7 +46,7 @@ const SERVICE_MAP = {
   visits: "spring-petclinic-visits-service",
   vets: "spring-petclinic-vets-service",
   genai: "spring-petclinic-genai-service",
-  monitoring: "spring-petclinic-admin-server", // 🔥 importante
+  monitoring: "spring-petclinic-admin-server",
   discovery: "spring-petclinic-discovery-server",
   config: "spring-petclinic-config-server",
 };
@@ -54,7 +55,11 @@ const TECH_FILES_BY_ROLE = {
   accountant: {
     gateway: ["billing-entry-points.md", "accountant-routes.md"],
     customers: ["customer-billing-profile.md", "owner-reconciliation.md"],
-    visits: ["visits-report.md", "visit-volume-metrics.md", "clinic-activity-dashboard.md"],
+    visits: [
+      "visits-report.md",
+      "visit-volume-metrics.md",
+      "clinic-activity-dashboard.md",
+    ],
     vets: ["vet-cost-allocation.md", "vet-performance-summary.md"],
     discovery: ["service-availability-for-reports.md"],
     config: ["accounting-config-overview.md"],
@@ -78,242 +83,261 @@ const TECH_FILES_BY_ROLE = {
 
 const DISTRICTS = {
   gateway: {
-    id: "gateway",
-    title: "API Gateway",
-    subtitle: "Main entry point and routing layer",
-    icon: Building2,
-    color: "#60a5fa",
-    github: `${GITHUB_BASE}/tree/main/spring-petclinic-api-gateway`,
-    files: [
-      "spring-petclinic-api-gateway/",
-      "src/main/resources/application.yml",
-      "pom.xml",
-    ],
-    subgraph: ["Routes", "Frontend", "Customers", "Visits", "Vets"],
+    icon: Server,
+    color: "#38bdf8",
+    defaultTitle: "API Gateway",
+    defaultSubtitle: "Single entry point for all Petclinic services",
     context: {
       accountant:
-        "This is the business entry point. It lets Laura access the application without needing to understand internal services.",
+        "This is where finance-related requests enter before reaching the internal services.",
       designer:
-        "This is the product entry point. It connects the user interface with the backend services behind the scenes.",
+        "This is the first navigation layer users touch before moving into product flows.",
     },
     why: {
       accountant:
-        "Because accountants need access to business flows, not routing code.",
+        "Because billing, reporting and customer/accounting actions usually start from external entry points.",
       designer:
-        "Because designers care about the user journey starting from the frontend.",
+        "Because this node explains where users enter the product and how navigation is routed.",
     },
     actions: {
       accountant: [
-        "Opening Petclinic app",
-        "Showing owners, pets and visits as business entities",
-        "Preparing KPI-style overview",
+        "Open Petclinic frontend",
+        "Open spreadsheet for financial analysis",
       ],
-      designer: [
-        "Opening Petclinic frontend",
-        "Reviewing main navigation",
-        "Checking owner and pet user journey",
-      ],
+      designer: ["Open Figma UX board", "Open Petclinic frontend"],
     },
   },
 
   customers: {
-    id: "customers",
-    title: "Customers Service",
-    subtitle: "Owners and pets data",
     icon: UserRound,
-    color: "#4ade80",
-    github: `${GITHUB_BASE}/tree/main/spring-petclinic-customers-service`,
-    files: [
-      "spring-petclinic-customers-service/",
-      "OwnerResource.java",
-      "PetResource.java",
-      "OwnerRepository.java",
-      "PetRepository.java",
-    ],
-    subgraph: ["Owners", "Pets", "Forms", "Customer Data"],
+    color: "#f97316",
+    defaultTitle: "Customers Service",
+    defaultSubtitle: "Owners, pets and customer records",
     context: {
       accountant:
-        "This service stores customer information. For Laura, it becomes a business database of owners and pets.",
+        "This service contains owner and customer data useful for billing reconciliation.",
       designer:
-        "This service powers owner profiles, pet creation, forms and customer-facing screens.",
+        "This service contains the customer profile flows and search experience.",
     },
     why: {
       accountant:
-        "Because customer data is useful for segmentation, activity reports and business analysis.",
+        "Because invoices and payments need to be connected to owners and customer profiles.",
       designer:
-        "Because this service directly affects forms, profiles and user experience.",
+        "Because most user journeys involve searching, viewing or editing customer information.",
     },
     actions: {
-      accountant: [
-        "Opening owners overview",
-        "Loading customer segmentation spreadsheet",
-        "Preparing owner/pet business summary",
-      ],
-      designer: [
-        "Opening owner profile flow",
-        "Reviewing pet creation form",
-        "Loading UX checklist for customer data",
-      ],
+      accountant: ["Open spreadsheet for customer billing"],
+      designer: ["Open Figma UX board", "Open Petclinic frontend"],
     },
   },
 
   visits: {
-    id: "visits",
-    title: "Visits Service",
-    subtitle: "Appointments and visit records",
     icon: BarChart3,
-    color: "#facc15",
-    github: `${GITHUB_BASE}/tree/main/spring-petclinic-visits-service`,
-    files: [
-      "spring-petclinic-visits-service/",
-      "VisitResource.java",
-      "VisitRepository.java",
-      "Visit.java",
-    ],
-    subgraph: ["Appointments", "Visit History", "Clinic Activity"],
+    color: "#22c55e",
+    defaultTitle: "Visits Service",
+    defaultSubtitle: "Visit history and clinic activity",
     context: {
       accountant:
-        "This service stores visit activity. For Laura, it becomes an operations and demand dashboard.",
+        "This service gives visit volume, activity and revenue-related information.",
       designer:
-        "This service powers appointment and visit flows, which are key parts of the user experience.",
+        "This service controls visit screens, visit details and empty states.",
     },
     why: {
       accountant:
-        "Because visits can be translated into activity volume, demand and operational metrics.",
+        "Because visits can be transformed into reports, cost summaries and revenue metrics.",
       designer:
-        "Because booking and visit creation are critical UX flows.",
+        "Because visit tracking is a core user workflow in the clinic interface.",
     },
     actions: {
-      accountant: [
-        "Opening visits report",
-        "Calculating visit volume metrics",
-        "Loading clinic activity dashboard",
-      ],
-      designer: [
-        "Opening appointment flow",
-        "Checking visit creation UX",
-        "Showing friction points",
-      ],
+      accountant: ["Open spreadsheet for visit reports"],
+      designer: ["Open Figma UX board", "Open Petclinic frontend"],
     },
   },
 
   vets: {
-    id: "vets",
-    title: "Vets Service",
-    subtitle: "Veterinarians and specialties",
-    icon: BriefcaseBusiness,
-    color: "#38bdf8",
-    github: `${GITHUB_BASE}/tree/main/spring-petclinic-vets-service`,
-    files: [
-      "spring-petclinic-vets-service/",
-      "VetResource.java",
-      "VetRepository.java",
-      "Specialty.java",
-    ],
-    subgraph: ["Veterinarians", "Specialties", "Capacity"],
+    icon: Building2,
+    color: "#a78bfa",
+    defaultTitle: "Vets Service",
+    defaultSubtitle: "Veterinarians, specialties and availability",
     context: {
       accountant:
-        "This service contains veterinarian and specialty information. For Laura, it helps with capacity planning.",
+        "This service helps understand vet activity, cost allocation and performance.",
       designer:
-        "This service powers vet listings and specialty discovery in the product.",
+        "This service supports vet cards, availability views and specialist discovery.",
     },
     why: {
       accountant:
-        "Because vet data helps explain capacity, availability and operational planning.",
+        "Because vet workload and performance can affect operational accounting.",
       designer:
-        "Because users need to discover the right veterinarian quickly.",
+        "Because vets need clear cards, schedules and readable UI components.",
     },
     actions: {
-      accountant: [
-        "Opening vets capacity overview",
-        "Loading specialties distribution",
-        "Preparing operations summary",
-      ],
-      designer: [
-        "Opening vet listing UI",
-        "Reviewing specialty filters",
-        "Checking discoverability",
-      ],
+      accountant: ["Open spreadsheet for vet performance"],
+      designer: ["Open Figma UX board", "Open Petclinic frontend"],
     },
   },
 
   genai: {
-    id: "genai",
-    title: "GenAI Service",
-    subtitle: "Natural language assistant",
     icon: Sparkles,
-    color: "#c084fc",
-    github: `${GITHUB_BASE}/tree/main/spring-petclinic-genai-service`,
-    files: [
-      "spring-petclinic-genai-service/",
-      "ChatClient configuration",
-      "AI assistant endpoints",
-    ],
-    subgraph: ["Chatbot", "Prompts", "Natural Language Actions"],
+    color: "#ec4899",
+    defaultTitle: "GenAI Service",
+    defaultSubtitle: "AI assistant and intelligent features",
     context: {
       accountant:
-        "This service lets Laura ask questions in natural language instead of searching through technical dashboards.",
+        "This service can summarize reports or explain financial data in natural language.",
       designer:
-        "This service is a conversational interface that must feel helpful, clear and human.",
+        "This service can power assistant-like experiences inside the product.",
     },
     why: {
       accountant:
-        "Because non-technical users should ask business questions without knowing the system structure.",
+        "Because an accountant may need automatic summaries instead of raw technical logs.",
       designer:
-        "Because conversational UX is part of the product experience.",
+        "Because AI features need UX flows, prompts and clear interaction design.",
     },
     actions: {
-      accountant: [
-        "Opening chatbot examples",
-        "Asking: Which owners have dogs?",
-        "Preparing natural-language business assistant",
-      ],
-      designer: [
-        "Opening chatbot UX flow",
-        "Reviewing assistant conversation design",
-        "Loading prompt examples",
-      ],
+      accountant: ["Open Petclinic frontend"],
+      designer: ["Open Figma UX board"],
+    },
+  },
+
+  discovery: {
+    icon: Network,
+    color: "#0ea5e9",
+    defaultTitle: "Discovery Server",
+    defaultSubtitle: "Service registration and routing discovery",
+    context: {
+      accountant:
+        "This tells whether internal services needed for reports are available.",
+      designer:
+        "This explains how services appear in the system map.",
+    },
+    why: {
+      accountant:
+        "Because if a required service is down, reports and accounting views may fail.",
+      designer:
+        "Because service discovery helps visualize how the product architecture connects.",
+    },
+    actions: {
+      accountant: ["Open Grafana dashboard"],
+      designer: ["Open Figma UX board"],
+    },
+  },
+
+  config: {
+    icon: Settings,
+    color: "#f59e0b",
+    defaultTitle: "Config Server",
+    defaultSubtitle: "Central configuration for all services",
+    context: {
+      accountant:
+        "This controls environment settings that may affect finance workflows.",
+      designer:
+        "This controls configuration that can change what UI or environment is active.",
+    },
+    why: {
+      accountant:
+        "Because wrong configuration can affect reports, billing rules or service behavior.",
+      designer:
+        "Because designers need to understand environment switches and configuration states.",
+    },
+    actions: {
+      accountant: ["Open Grafana dashboard"],
+      designer: ["Open Figma UX board"],
     },
   },
 
   monitoring: {
-    id: "monitoring",
-    title: "Monitoring",
-    subtitle: "Admin server, service health and system status",
-    icon: BarChart3,
-    color: "#f97316",
-    github: `${GITHUB_BASE}/tree/main/spring-petclinic-admin-server`,
-    files: [
-      "spring-petclinic-admin-server/",
-      "accounting-health-checks.md",
-      "navigation-entry-points.md",
-      "service-status-ui.md",
-      "system-map-ux.md",
-    ],
-    subgraph: ["Admin Server", "Health Checks", "Service Status", "System Map"],
+    icon: Activity,
+    color: "#ef4444",
+    defaultTitle: "Admin Server",
+    defaultSubtitle: "Monitoring, health checks and service status",
     context: {
       accountant:
-        "This district shows service health and operational checks in a business-readable way.",
+        "This shows whether the services needed for accounting workflows are healthy.",
       designer:
-        "This district helps Sofia understand system status screens, service visibility and monitoring UX.",
+        "This gives a visual status layer for system health and errors.",
     },
     why: {
       accountant:
-        "Because accountants need confidence that business reports depend on healthy services.",
+        "Because financial workflows depend on reliable services and health checks.",
       designer:
-        "Because monitoring screens must make service status understandable and easy to scan.",
+        "Because system status can be translated into dashboards, alerts and admin UI.",
     },
     actions: {
-      accountant: [
-        "Opening accounting health checks",
-        "Checking service availability",
-        "Preparing operational summary",
-      ],
-      designer: [
-        "Opening service status UI",
-        "Reviewing system map UX",
-        "Checking monitoring navigation",
-      ],
+      accountant: ["Open Grafana dashboard"],
+      designer: ["Open Figma UX board"],
+    },
+  },
+};
+
+const DISTRICT_CONTENT = {
+  accountant: {
+    gateway: {
+      title: "Billing Entry Points",
+      subtitle: "Invoices, payments and accounting flows",
+    },
+    customers: {
+      title: "Customer Accounts",
+      subtitle: "Owners, billing profiles and transactions",
+    },
+    visits: {
+      title: "Visit Reports",
+      subtitle: "Clinic activity and revenue per visit",
+    },
+    vets: {
+      title: "Vet Cost Allocation",
+      subtitle: "Costs and performance per vet",
+    },
+    genai: {
+      title: "Financial AI Assistant",
+      subtitle: "Automatic summaries and report explanations",
+    },
+    discovery: {
+      title: "Service Availability",
+      subtitle: "System status for financial reports",
+    },
+    config: {
+      title: "Accounting Config",
+      subtitle: "Financial rules and environment setup",
+    },
+    monitoring: {
+      title: "Accounting Health",
+      subtitle: "System health impacting billing",
+    },
+  },
+
+  designer: {
+    gateway: {
+      title: "Navigation Entry Flows",
+      subtitle: "User entry points and product routing",
+    },
+    customers: {
+      title: "Customer UX",
+      subtitle: "Search, profiles and interactions",
+    },
+    visits: {
+      title: "Visit Dashboard",
+      subtitle: "UI for visit tracking and visit details",
+    },
+    vets: {
+      title: "Vet Interface",
+      subtitle: "Availability, cards and layout patterns",
+    },
+    genai: {
+      title: "AI Interaction Design",
+      subtitle: "Assistant flows, prompts and UX behavior",
+    },
+    discovery: {
+      title: "Service Map",
+      subtitle: "Visual system architecture",
+    },
+    config: {
+      title: "Environment UI",
+      subtitle: "Switching environments visually",
+    },
+    monitoring: {
+      title: "System Status UI",
+      subtitle: "Visual health, errors and alerts",
     },
   },
 };
@@ -344,24 +368,6 @@ function DistrictNode({ data }) {
 
 const nodeTypes = { district: DistrictNode };
 
-const initialNodes = Object.entries(DISTRICTS).map(([id, district], index) => {
-  const positions = {
-    gateway: { x: 420, y: 40 },
-    customers: { x: 80, y: 240 },
-    visits: { x: 420, y: 240 },
-    vets: { x: 760, y: 240 },
-    genai: { x: 250, y: 470 },
-    monitoring: { x: 600, y: 470 },
-  };
-
-  return {
-    id,
-    type: "district",
-    position: positions[id] || { x: 100 + index * 260, y: 100 },
-    data: { ...district },
-  };
-});
-
 const initialEdges = [
   { id: "e1", source: "gateway", target: "customers", animated: true },
   { id: "e2", source: "gateway", target: "visits", animated: true },
@@ -371,6 +377,8 @@ const initialEdges = [
   { id: "e6", source: "monitoring", target: "customers", animated: true },
   { id: "e7", source: "monitoring", target: "visits", animated: true },
   { id: "e8", source: "monitoring", target: "vets", animated: true },
+  { id: "e9", source: "discovery", target: "gateway", animated: true },
+  { id: "e10", source: "config", target: "gateway", animated: true },
 ];
 
 export default function App() {
@@ -385,6 +393,35 @@ export default function App() {
 
   const addLog = (text) => setLogs((prev) => [...prev, text]);
 
+  const nodes = useMemo(() => {
+    const positions = {
+      gateway: { x: 420, y: 40 },
+      customers: { x: 80, y: 240 },
+      visits: { x: 420, y: 240 },
+      vets: { x: 760, y: 240 },
+      genai: { x: 250, y: 470 },
+      monitoring: { x: 600, y: 470 },
+      discovery: { x: 80, y: 40 },
+      config: { x: 760, y: 40 },
+    };
+
+    return Object.entries(DISTRICTS).map(([id, district], index) => {
+      const dynamicContent = role ? DISTRICT_CONTENT[role]?.[id] : null;
+
+      return {
+        id,
+        type: "district",
+        position: positions[id] || { x: 100 + index * 260, y: 100 },
+        data: {
+          ...district,
+          id,
+          title: dynamicContent?.title || district.defaultTitle,
+          subtitle: dynamicContent?.subtitle || district.defaultSubtitle,
+        },
+      };
+    });
+  }, [role]);
+
   const fakeOpen = (action) => {
     if (action.includes("Grafana")) {
       window.open("http://localhost:3000", "_blank");
@@ -397,46 +434,50 @@ export default function App() {
     }
   };
 
-const getTechFilePath = (districtId, file) => {
-  const serviceFolder = SERVICE_MAP[districtId];
+  const getTechFilePath = (districtId, file) => {
+    const serviceFolder = SERVICE_MAP[districtId];
 
-  if (!serviceFolder) {
-    return file;
-  }
+    if (!serviceFolder) {
+      return file;
+    }
 
-  return `${serviceFolder}/${file}`;
-};
+    return `${serviceFolder}/${file}`;
+  };
 
-const openLocalFile = (relativePath, index = 0) => {
-  const url = `${LOCAL_OPEN_SERVER}?path=${encodeURIComponent(relativePath)}`;
+  const openTechFiles = async () => {
+    if (!selectedDistrict || !role) {
+      addLog("Select a persona and a district first.");
+      return;
+    }
 
-  setTimeout(() => {
-    window.open(url, "_blank");
-  }, index * 250);
-};
+    const districtId = selectedDistrict.id;
+    const files = TECH_FILES_BY_ROLE[role]?.[districtId] || [];
 
-const openTechFiles = () => {
-  if (!selectedDistrict || !role) {
-    addLog("Select a persona and a district first.");
-    return;
-  }
+    if (files.length === 0) {
+      addLog(
+        `No ${ROLE_CONFIG[role].label} files found for ${selectedDistrict.title}.`
+      );
+      return;
+    }
 
-  const districtId = selectedDistrict.id;
-  const files = TECH_FILES_BY_ROLE[role]?.[districtId] || [];
+    const localPaths = files.map((file) => getTechFilePath(districtId, file));
 
-  if (files.length === 0) {
-    addLog(
-      `No ${ROLE_CONFIG[role].label} files found for ${selectedDistrict.title}.`
-    );
-    return;
-  }
+    try {
+      await fetch("http://localhost:3001/open-many", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ paths: localPaths }),
+      });
 
-  files.forEach((file, index) => {
-    const localPath = getTechFilePath(districtId, file);
-    openLocalFile(localPath, index);
-    addLog(`Opening local file: ${localPath}`);
-  });
-};
+      localPaths.forEach((path) => {
+        addLog(`Opening local file: ${path}`);
+      });
+    } catch (error) {
+      addLog(`Error opening files: ${error.message}`);
+    }
+  };
 
   const runAgent = (districtId) => {
     if (!role) {
@@ -444,7 +485,16 @@ const openTechFiles = () => {
       return;
     }
 
-    const district = DISTRICTS[districtId];
+    const baseDistrict = DISTRICTS[districtId];
+    const dynamicContent = DISTRICT_CONTENT[role]?.[districtId];
+
+    const district = {
+      ...baseDistrict,
+      id: districtId,
+      title: dynamicContent?.title || baseDistrict.defaultTitle,
+      subtitle: dynamicContent?.subtitle || baseDistrict.defaultSubtitle,
+    };
+
     const currentRole = ROLE_CONFIG[role];
     const actions = district.actions[role];
 
@@ -501,12 +551,17 @@ const openTechFiles = () => {
               <p>Click a microservice to translate for your role</p>
             </div>
           )}
-          <button 
-            className={`collapse-handle ${leftCollapsed ? "expanded" : ""}`} 
+
+          <button
+            className={`collapse-handle ${leftCollapsed ? "expanded" : ""}`}
             onClick={() => setLeftCollapsed(!leftCollapsed)}
             title={leftCollapsed ? "Expand sidebar" : "Collapse sidebar"}
           >
-            {leftCollapsed ? <ChevronsRight size={18} /> : <ChevronsLeft size={18} />}
+            {leftCollapsed ? (
+              <ChevronsRight size={18} />
+            ) : (
+              <ChevronsLeft size={18} />
+            )}
           </button>
         </div>
 
@@ -524,20 +579,26 @@ const openTechFiles = () => {
                   className={`role-card ${active ? "active" : ""}`}
                   onClick={() => {
                     setRole(key);
+                    setSelectedDistrict(null);
                     setLogs([
                       `${value.name} selected.`,
                       `${value.intro}.`,
+                      "The map has been translated for this persona.",
                       "Click a microservice on the map.",
                     ]);
                   }}
                   title={leftCollapsed ? value.label : ""}
                 >
-                  <div className="role-icon" style={{ 
-                    background: "transparent",
-                    border: "none"
-                  }}>
+                  <div
+                    className="role-icon"
+                    style={{
+                      background: "transparent",
+                      border: "none",
+                    }}
+                  >
                     <Icon size={20} color={value.color} />
                   </div>
+
                   {!leftCollapsed && (
                     <div>
                       <strong>{value.name}</strong>
@@ -549,13 +610,12 @@ const openTechFiles = () => {
             })}
           </div>
         </div>
-
       </aside>
 
       <main className="map-area">
         <div className="flow-wrapper">
           <ReactFlow
-            nodes={initialNodes}
+            nodes={nodes}
             edges={initialEdges}
             nodeTypes={nodeTypes}
             onNodeClick={onNodeClick}
