@@ -7,7 +7,7 @@ import path from "path";
 const app = express();
 const PORT = 3001;
 
-const BASE_PATH = "/Users/polr/Documents/Github/spring-petclinic-microservices-main";
+const BASE_PATH = "/Users/polr/UPC/HackUPC/onboarding-map/demoHackUpc/docs/";
 
 app.use(cors());
 app.use(express.json());

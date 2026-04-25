@@ -1,0 +1,121 @@
+﻿Component_ID,Component_Name,Atomic_Level,Complexity_Type,Platform,Owner_Team,Status,Token_Version_Used,Has_Dark_Mode,Has_Accessibility_Attr,Instances_In_Codebase,Storybook_Coverage_%,Unit_Test_Coverage_%,Avg_Render_Time_ms,Last_Modified_Days_Ago,Design_Debt_Score,Notes
+DS-MOD-981,Modal,Molecules,core,Tablet,--sin_asignar--,experimental,tokens-v1-legacy,NO,NO,207,36%,,"53,3",194,"8,3",Rompe en Safari 16
+DS-BUT-476,Button,Atoms,core,Web,--sin_asignar--,deprecated,tokens-v1-legacy,NO,NO,96,36%,,"212,3",97,"1,9",Rompe en Safari 16
+DS-SEA-980,Search_Bar,Molecules,core,Tablet,--sin_asignar--,BROKEN,tokens-v1,NO,YES,166,98%,,"85,1",220,"3,2",Revisar contraste WCAG AA
+DS-SEA-610,Search_Bar,Molecules,core,Tablet,Equipo_Core,in_review,tokens-v2.1-beta,NO,YES,175,69%,28%,"279,4",12,"9,2",Duplicado en mobile
+DS-SEA-370,Search_Bar,Molecules,core,Android,Equipo_Core,BROKEN,tokens-v2,YES,YES,89,24%,30%,TIMEOUT,278,"2,3",Pendiente migraciÃ³n a tokens-v2
+DS-NAV-983,Nav_Header,Organisms,core,Android,--sin_asignar--,in_review,tokens-v1-legacy,PARTIAL,NO,134,51%,97%,TIMEOUT,92,"4,2",Migrado parcialmente
+DS-BAD-646,Badge,Atoms,core,Android,--sin_asignar--,stable,tokens-v1-legacy,NO,YES,25,N/A,60%,"187,5",94,"6,4",Revisar contraste WCAG AA
+DS-CAL-247,Calendar_Widget,Organisms,complex,Web,Equipo_Veterinaria,stable,tokens-v2,NO,YES,126,63%,,246,323,"9,5",Revisar contraste WCAG AA
+DS-SEA-641,Search_Bar,Molecules,core,Tablet,Equipo_Core,deprecated,tokens-v1-legacy,--,NO,92,66%,67%,"15,8",232,"8,3",Deprecar en Q3
+DS-DAT-318,Data_Table,Organisms,core,iOS,--sin_asignar--,deprecated,tokens-v1,NO,YES,211,13%,,"253,4",373,"8,2",Sin documentar
+DS-MOD-147,Modal,Molecules,core,Web,Equipo_Veterinaria,BROKEN,tokens-v1-legacy,YES,YES,50,36%,78%,"79,8",367,"9,1",Revisar contraste WCAG AA
+DS-SID-370,Sidebar,Organisms,complex,iOS,Equipo_Mobile,experimental,NONE,PARTIAL,PARTIAL,232,55%,,"161,8",366,"1,8",--
+DS-NAV-960,Nav_Header,Organisms,core,iOS,Equipo_Mobile,experimental,tokens-v2.1-beta,NO,PARTIAL,148,71%,79%,"81,5",321,"4,6",Migrado parcialmente
+DS-INP-618,Input_Field,Atoms,core,Android,Equipo_Mobile,deprecated,tokens-v1,--,NO,107,67%,,17,34,"3,9",--
+DS-TOA-961,Toast_Alert,Molecules,core,iOS,Equipo_Veterinaria,deprecated,tokens-v1-legacy,PARTIAL,PARTIAL,69,49%,,"84,8",342,"2,1",Revisar contraste WCAG AA
+DS-TOA-990,Toast_Alert,Molecules,core,Tablet,--sin_asignar--,stable,tokens-v2,NO,NO,85,24%,80%,"126,5",381,"2,5",Migrado parcialmente
+DS-INP-429,Input_Field,Atoms,core,Android,Equipo_Mobile,deprecated,tokens-v1-legacy,--,YES,156,N/A,,"38,9",68,"6,8",Revisar contraste WCAG AA
+DS-MOD-545,Modal,Molecules,core,iOS,--sin_asignar--,in_review,tokens-v2.1-beta,NO,YES,23,N/A,,"285,2",372,"7,5",Rompe en Safari 16
+DS-MOD-200,Modal,Molecules,core,Tablet,Equipo_Core,in_review,tokens-v2,YES,YES,193,39%,97%,"92,1",192,"2,4",OK
+DS-SID-398,Sidebar,Organisms,complex,iOS,Equipo_Mobile,deprecated,tokens-v2.1-beta,YES,NO,72,N/A,83%,"105,6",2,"8,2",Deprecar en Q3
+DS-MOD-708,Modal,Molecules,core,iOS,Equipo_Mobile,stable,NONE,--,PARTIAL,208,N/A,,"22,1",317,"5,7",Revisar contraste WCAG AA
+DS-TOA-608,Toast_Alert,Molecules,core,Web,Equipo_Core,BROKEN,NONE,--,NO,69,19%,,"297,1",287,"5,7",Migrado parcialmente
+DS-TOA-792,Toast_Alert,Molecules,core,Web,Equipo_Veterinaria,deprecated,tokens-v1,YES,NO,123,N/A,30%,"122,3",256,"3,7",Migrado parcialmente
+DS-SEA-969,Search_Bar,Molecules,core,Tablet,Equipo_Core,experimental,tokens-v2.1-beta,PARTIAL,PARTIAL,14,43%,55%,"55,9",209,"3,9",Usa colores hardcoded
+DS-CAL-775,Calendar_Widget,Organisms,complex,Tablet,Equipo_Veterinaria,experimental,tokens-v1,--,NO,123,72%,,TIMEOUT,140,"2,7",Deprecar en Q3
+DS-BAD-704,Badge,Atoms,core,iOS,--sin_asignar--,BROKEN,tokens-v2.1-beta,PARTIAL,PARTIAL,125,94%,52%,"62,8",287,"1,6",Duplicado en mobile
+DS-SID-132,Sidebar,Organisms,complex,Tablet,Equipo_Veterinaria,deprecated,tokens-v1-legacy,NO,NO,49,13%,82%,"27,8",364,7,--
+DS-MOD-688,Modal,Molecules,core,Web,Equipo_Mobile,deprecated,tokens-v1,YES,PARTIAL,210,31%,,16,11,"2,3",Rompe en Safari 16
+DS-SID-321,Sidebar,Organisms,complex,iOS,Equipo_Mobile,BROKEN,tokens-v2.1-beta,PARTIAL,NO,120,13%,43%,"56,6",304,"7,8",Rompe en Safari 16
+DS-CAR-911,Card,Molecules,core,Web,Equipo_Veterinaria,BROKEN,NONE,NO,YES,2,61%,2%,"250,9",336,"5,7",OK
+DS-BUT-595,Button,Atoms,core,Web,Equipo_Mobile,deprecated,tokens-v2.1-beta,NO,YES,194,64%,7%,"58,4",187,"5,5",Rompe en Safari 16
+DS-INP-463,Input_Field,Atoms,core,Tablet,Equipo_Veterinaria,in_review,tokens-v2,PARTIAL,NO,174,N/A,72%,"32,3",203,"8,1",Migrado parcialmente
+DS-FOR-865,Form_Stepper,Organisms,complex,Android,--sin_asignar--,experimental,tokens-v1-legacy,YES,YES,226,18%,16%,"229,6",103,9,Revisar contraste WCAG AA
+DS-BUT-940,Button,Atoms,core,Android,Equipo_Mobile,BROKEN,tokens-v1-legacy,NO,NO,110,81%,,"53,4",226,"6,9",Pendiente migraciÃ³n a tokens-v2
+DS-CAR-689,Card,Molecules,core,Android,--sin_asignar--,in_review,tokens-v1-legacy,PARTIAL,NO,184,63%,,"15,2",168,"2,7",--
+DS-CAL-149,Calendar_Widget,Organisms,complex,iOS,--sin_asignar--,experimental,NONE,PARTIAL,PARTIAL,56,85%,74%,"153,3",232,"2,7",Usa colores hardcoded
+DS-CAR-935,Card,Molecules,core,iOS,Equipo_Veterinaria,deprecated,tokens-v2,--,YES,26,70%,53%,TIMEOUT,277,"7,6",OK
+DS-INP-203,Input_Field,Atoms,core,iOS,Equipo_Core,deprecated,tokens-v2,NO,YES,206,N/A,,TIMEOUT,394,"6,5",Pendiente migraciÃ³n a tokens-v2
+DS-CAR-499,Card,Molecules,core,iOS,Equipo_Mobile,stable,tokens-v2,--,PARTIAL,52,18%,4%,TIMEOUT,165,"6,7",Migrado parcialmente
+DS-BAD-748,Badge,Atoms,core,iOS,Equipo_Veterinaria,BROKEN,tokens-v1-legacy,--,PARTIAL,176,88%,,"103,5",374,"1,4",Usa colores hardcoded
+DS-INP-355,Input_Field,Atoms,core,iOS,Equipo_Core,BROKEN,tokens-v1-legacy,NO,NO,73,11%,18%,"159,4",52,"6,3",Pendiente migraciÃ³n a tokens-v2
+DS-FOR-861,Form_Stepper,Organisms,complex,Android,Equipo_Core,in_review,tokens-v2.1-beta,--,YES,228,91%,100%,"295,6",303,"2,1",Duplicado en mobile
+DS-CAL-399,Calendar_Widget,Organisms,complex,iOS,Equipo_Core,experimental,tokens-v2.1-beta,PARTIAL,PARTIAL,163,59%,34%,"276,7",352,"6,3",Pendiente migraciÃ³n a tokens-v2
+DS-FOR-716,Form_Stepper,Organisms,complex,Android,--sin_asignar--,in_review,tokens-v1,NO,NO,70,66%,41%,"39,3",104,"5,3",Rompe en Safari 16
+DS-MOD-482,Modal,Molecules,core,Tablet,Equipo_Core,in_review,NONE,NO,NO,111,39%,,TIMEOUT,46,"4,6",Usa colores hardcoded
+DS-NAV-276,Nav_Header,Organisms,core,Tablet,Equipo_Core,stable,tokens-v2.1-beta,--,YES,121,12%,16%,"158,1",191,5,Usa colores hardcoded
+DS-NAV-221,Nav_Header,Organisms,core,Web,Equipo_Core,BROKEN,tokens-v2.1-beta,NO,YES,103,25%,,"117,1",261,"1,6",Pendiente migraciÃ³n a tokens-v2
+DS-DAT-162,Data_Table,Organisms,core,iOS,Equipo_Mobile,deprecated,NONE,PARTIAL,NO,116,61%,62%,"117,2",374,8,Usa colores hardcoded
+DS-BAD-310,Badge,Atoms,core,iOS,Equipo_Veterinaria,stable,tokens-v1,NO,PARTIAL,76,41%,65%,"52,6",40,"5,9",Usa colores hardcoded
+DS-DAT-909,Data_Table,Organisms,core,Tablet,Equipo_Veterinaria,deprecated,tokens-v2.1-beta,PARTIAL,NO,145,97%,80%,"296,4",62,"5,9",Rompe en Safari 16
+DS-TOA-995,Toast_Alert,Molecules,core,iOS,Equipo_Core,in_review,NONE,--,NO,175,31%,27%,"175,7",318,4,OK
+DS-CAL-571,Calendar_Widget,Organisms,complex,iOS,Equipo_Mobile,experimental,tokens-v2,--,NO,219,26%,70%,TIMEOUT,110,"2,2",Pendiente migraciÃ³n a tokens-v2
+DS-BAD-552,Badge,Atoms,core,Web,--sin_asignar--,BROKEN,tokens-v1,--,PARTIAL,198,N/A,,"192,4",264,"7,5",Deprecar en Q3
+DS-INP-484,Input_Field,Atoms,core,Tablet,Equipo_Veterinaria,deprecated,NONE,YES,NO,74,N/A,35%,"176,7",82,"7,1",Usa colores hardcoded
+DS-TOA-977,Toast_Alert,Molecules,core,Web,Equipo_Mobile,stable,tokens-v1,YES,YES,245,38%,49%,252,108,"1,4",OK
+DS-NAV-869,Nav_Header,Organisms,core,Android,--sin_asignar--,in_review,tokens-v2.1-beta,PARTIAL,NO,5,59%,,"278,9",231,"4,8",Revisar contraste WCAG AA
+DS-CAL-955,Calendar_Widget,Organisms,complex,Web,Equipo_Veterinaria,stable,tokens-v2.1-beta,PARTIAL,NO,143,78%,52%,"50,1",241,"9,1",Revisar contraste WCAG AA
+DS-MOD-795,Modal,Molecules,core,iOS,Equipo_Veterinaria,in_review,NONE,YES,YES,46,96%,38%,"260,4",391,"2,7",Rompe en Safari 16
+DS-BAD-662,Badge,Atoms,core,Tablet,--sin_asignar--,experimental,tokens-v2,NO,YES,11,N/A,,"128,7",22,"1,2",Pendiente migraciÃ³n a tokens-v2
+DS-BAD-846,Badge,Atoms,core,Tablet,Equipo_Mobile,stable,tokens-v2.1-beta,NO,YES,86,27%,56%,"198,3",274,"9,5",Duplicado en mobile
+DS-SID-203,Sidebar,Organisms,complex,iOS,Equipo_Core,experimental,tokens-v1,NO,PARTIAL,157,56%,19%,278,384,"8,3",Sin documentar
+DS-CAL-289,Calendar_Widget,Organisms,complex,Android,Equipo_Veterinaria,BROKEN,tokens-v1-legacy,--,NO,180,21%,,"210,5",273,"7,3",Revisar contraste WCAG AA
+DS-TOA-764,Toast_Alert,Molecules,core,Android,Equipo_Core,experimental,tokens-v2,YES,PARTIAL,113,83%,64%,"68,3",265,"4,6",--
+DS-TOA-117,Toast_Alert,Molecules,core,iOS,--sin_asignar--,experimental,tokens-v2.1-beta,--,YES,151,90%,82%,"221,3",208,"6,7",Pendiente migraciÃ³n a tokens-v2
+DS-DAT-929,Data_Table,Organisms,core,iOS,Equipo_Veterinaria,BROKEN,tokens-v2.1-beta,PARTIAL,YES,33,100%,93%,TIMEOUT,3,"3,2",Usa colores hardcoded
+DS-TOA-116,Toast_Alert,Molecules,core,iOS,Equipo_Core,stable,tokens-v2.1-beta,NO,NO,58,47%,11%,"234,3",91,"7,2",Rompe en Safari 16
+DS-INP-324,Input_Field,Atoms,core,iOS,--sin_asignar--,BROKEN,tokens-v2.1-beta,NO,PARTIAL,178,63%,80%,163,119,"7,6",Deprecar en Q3
+DS-INP-995,Input_Field,Atoms,core,Tablet,--sin_asignar--,experimental,NONE,NO,NO,151,N/A,57%,"201,2",24,"3,7",Usa colores hardcoded
+DS-FOR-180,Form_Stepper,Organisms,complex,Web,--sin_asignar--,BROKEN,tokens-v2,YES,YES,233,95%,3%,"204,8",339,"9,9",Usa colores hardcoded
+DS-BAD-714,Badge,Atoms,core,Web,Equipo_Veterinaria,in_review,tokens-v1-legacy,YES,NO,182,89%,93%,"125,1",294,"8,5",Deprecar en Q3
+DS-SID-881,Sidebar,Organisms,complex,iOS,--sin_asignar--,in_review,NONE,PARTIAL,NO,242,87%,79%,"60,7",130,"5,2",Usa colores hardcoded
+DS-FOR-676,Form_Stepper,Organisms,complex,Tablet,Equipo_Veterinaria,in_review,tokens-v1,--,NO,41,61%,60%,"234,8",79,"3,8",OK
+DS-CAR-858,Card,Molecules,core,Web,Equipo_Core,BROKEN,tokens-v1-legacy,--,PARTIAL,216,69%,38%,221,372,"5,5",Revisar contraste WCAG AA
+DS-NAV-690,Nav_Header,Organisms,core,iOS,Equipo_Veterinaria,deprecated,NONE,--,NO,170,15%,12%,"31,2",168,"4,1",Deprecar en Q3
+DS-BAD-638,Badge,Atoms,core,Android,Equipo_Veterinaria,in_review,tokens-v1-legacy,NO,PARTIAL,88,36%,98%,"73,4",36,"5,6",Deprecar en Q3
+DS-NAV-603,Nav_Header,Organisms,core,Tablet,Equipo_Veterinaria,BROKEN,tokens-v1-legacy,NO,NO,68,76%,34%,"238,4",285,"1,6",Pendiente migraciÃ³n a tokens-v2
+DS-CAL-839,Calendar_Widget,Organisms,complex,Tablet,Equipo_Mobile,experimental,NONE,PARTIAL,PARTIAL,205,35%,67%,"22,3",234,"2,1",Duplicado en mobile
+DS-MOD-575,Modal,Molecules,core,Tablet,--sin_asignar--,in_review,tokens-v1-legacy,PARTIAL,YES,158,N/A,,"160,6",226,"2,4",Duplicado en mobile
+DS-TOA-900,Toast_Alert,Molecules,core,Tablet,--sin_asignar--,experimental,tokens-v1,--,PARTIAL,171,66%,13%,"202,1",318,7,Deprecar en Q3
+DS-SEA-318,Search_Bar,Molecules,core,iOS,Equipo_Mobile,stable,tokens-v2,PARTIAL,YES,102,46%,,TIMEOUT,112,"5,6",Revisar contraste WCAG AA
+DS-NAV-706,Nav_Header,Organisms,core,Tablet,--sin_asignar--,experimental,tokens-v1-legacy,NO,YES,118,27%,31%,"130,4",319,"8,6",Sin documentar
+DS-CAL-991,Calendar_Widget,Organisms,complex,Web,--sin_asignar--,experimental,tokens-v2.1-beta,PARTIAL,NO,127,34%,72%,"59,8",232,"3,3",Duplicado en mobile
+DS-TOA-779,Toast_Alert,Molecules,core,Web,Equipo_Core,in_review,tokens-v1,YES,YES,21,N/A,49%,"274,2",300,9,Rompe en Safari 16
+DS-CAR-708,Card,Molecules,core,iOS,Equipo_Mobile,deprecated,tokens-v2.1-beta,YES,YES,133,93%,26%,"209,8",202,"9,2",Migrado parcialmente
+DS-NAV-442,Nav_Header,Organisms,core,Android,Equipo_Core,BROKEN,tokens-v1-legacy,PARTIAL,YES,2,10%,,"220,1",214,"4,8",Sin documentar
+DS-INP-167,Input_Field,Atoms,core,Android,Equipo_Mobile,deprecated,tokens-v1-legacy,NO,YES,169,N/A,90%,"51,7",256,1,OK
+DS-BAD-448,Badge,Atoms,core,Web,Equipo_Mobile,deprecated,tokens-v1-legacy,YES,PARTIAL,166,37%,4%,"92,8",70,"2,4",--
+DS-SEA-980,Search_Bar,Molecules,core,Web,Equipo_Veterinaria,experimental,tokens-v2,NO,YES,86,96%,65%,"56,4",382,"8,5",Migrado parcialmente
+DS-SEA-963,Search_Bar,Molecules,core,Web,Equipo_Veterinaria,experimental,tokens-v2,--,YES,62,64%,38%,"297,2",189,"4,1",Deprecar en Q3
+DS-CAL-550,Calendar_Widget,Organisms,complex,Tablet,Equipo_Mobile,stable,tokens-v2.1-beta,NO,YES,48,37%,21%,"42,4",130,"5,9",Deprecar en Q3
+DS-BUT-721,Button,Atoms,core,iOS,Equipo_Mobile,in_review,tokens-v1,PARTIAL,PARTIAL,25,23%,,"199,4",333,"8,9",Usa colores hardcoded
+DS-SID-320,Sidebar,Organisms,complex,iOS,--sin_asignar--,experimental,tokens-v2.1-beta,NO,NO,153,79%,91%,"278,7",374,7,Usa colores hardcoded
+DS-DAT-527,Data_Table,Organisms,core,Web,Equipo_Core,BROKEN,tokens-v2,NO,PARTIAL,67,22%,,"24,6",142,"3,5",Migrado parcialmente
+DS-SID-628,Sidebar,Organisms,complex,Tablet,--sin_asignar--,in_review,NONE,--,NO,50,89%,,"72,9",250,"9,9",Usa colores hardcoded
+DS-BAD-271,Badge,Atoms,core,Tablet,Equipo_Mobile,BROKEN,tokens-v1,NO,YES,36,N/A,24%,"216,4",229,"6,3",--
+DS-INP-705,Input_Field,Atoms,core,Tablet,Equipo_Core,experimental,tokens-v2.1-beta,--,NO,226,32%,68%,94,79,"4,8",Rompe en Safari 16
+DS-DAT-584,Data_Table,Organisms,core,iOS,Equipo_Veterinaria,experimental,NONE,YES,PARTIAL,188,41%,,"183,9",283,"6,8",Deprecar en Q3
+DS-DAT-689,Data_Table,Organisms,core,Tablet,--sin_asignar--,deprecated,tokens-v2.1-beta,YES,YES,225,42%,32%,"126,9",75,"1,7",Migrado parcialmente
+DS-MOD-181,Modal,Molecules,core,Android,Equipo_Veterinaria,BROKEN,tokens-v1-legacy,YES,NO,221,25%,64%,"219,1",346,"1,8",Deprecar en Q3
+DS-TOA-501,Toast_Alert,Molecules,core,iOS,--sin_asignar--,BROKEN,tokens-v1,--,NO,186,55%,,"82,1",21,"9,4",OK
+DS-INP-186,Input_Field,Atoms,core,Web,Equipo_Veterinaria,stable,tokens-v1-legacy,NO,NO,100,N/A,69%,"222,5",66,"3,9",Duplicado en mobile
+DS-INP-673,Input_Field,Atoms,core,iOS,Equipo_Mobile,deprecated,tokens-v2.1-beta,--,YES,71,N/A,48%,"276,7",268,"6,1",--
+DS-TOA-857,Toast_Alert,Molecules,core,Android,Equipo_Veterinaria,BROKEN,tokens-v1,YES,NO,146,39%,,"165,2",34,"6,6",Revisar contraste WCAG AA
+DS-SID-168,Sidebar,Organisms,complex,iOS,Equipo_Veterinaria,stable,tokens-v2.1-beta,YES,NO,15,N/A,,"81,9",111,"6,2",OK
+DS-BAD-755,Badge,Atoms,core,iOS,Equipo_Mobile,stable,tokens-v1,YES,PARTIAL,94,17%,11%,"173,1",334,"7,7",Migrado parcialmente
+DS-TOA-730,Toast_Alert,Molecules,core,Tablet,Equipo_Core,in_review,tokens-v2,PARTIAL,PARTIAL,132,34%,90%,208,81,"5,2",Usa colores hardcoded
+DS-SID-372,Sidebar,Organisms,complex,Web,Equipo_Mobile,BROKEN,tokens-v2,--,NO,168,98%,,"241,6",105,"3,8",--
+DS-BUT-220,Button,Atoms,core,Tablet,Equipo_Core,stable,tokens-v1,NO,YES,85,84%,,218,12,"1,8",Migrado parcialmente
+DS-DAT-251,Data_Table,Organisms,core,Android,Equipo_Core,BROKEN,tokens-v1-legacy,PARTIAL,NO,0,63%,,"146,1",168,"9,3",Sin documentar
+DS-CAR-798,Card,Molecules,core,Android,--sin_asignar--,experimental,NONE,--,NO,174,91%,34%,"165,3",174,"7,9",Pendiente migraciÃ³n a tokens-v2
+DS-SEA-713,Search_Bar,Molecules,core,Android,Equipo_Veterinaria,deprecated,tokens-v2.1-beta,--,YES,230,10%,26%,"216,6",345,"4,9",Migrado parcialmente
+DS-SEA-678,Search_Bar,Molecules,core,Android,Equipo_Mobile,stable,tokens-v1,YES,PARTIAL,173,N/A,7%,TIMEOUT,42,"7,3",Deprecar en Q3
+DS-BUT-777,Button,Atoms,core,Tablet,Equipo_Mobile,BROKEN,tokens-v1,NO,PARTIAL,125,63%,21%,"37,4",5,"1,9",Usa colores hardcoded
+DS-BAD-947,Badge,Atoms,core,Android,Equipo_Core,BROKEN,tokens-v2.1-beta,PARTIAL,YES,163,79%,49%,"78,9",80,"1,2",Sin documentar
+DS-CAR-981,Card,Molecules,core,Tablet,Equipo_Mobile,experimental,NONE,YES,PARTIAL,192,98%,95%,TIMEOUT,79,"2,9",Duplicado en mobile
+DS-INP-363,Input_Field,Atoms,core,Android,Equipo_Core,in_review,tokens-v2,NO,YES,169,59%,81%,"199,1",103,"2,9",OK
+DS-BUT-224,Button,Atoms,core,Web,Equipo_Core,experimental,tokens-v2,PARTIAL,YES,9,92%,72%,"167,2",329,"8,2",Pendiente migraciÃ³n a tokens-v2
+DS-CAR-725,Card,Molecules,core,iOS,--sin_asignar--,experimental,tokens-v1,--,PARTIAL,34,22%,,"23,9",107,"9,1",Usa colores hardcoded
+DS-CAR-511,Card,Molecules,core,Tablet,Equipo_Veterinaria,stable,tokens-v2,PARTIAL,PARTIAL,26,85%,18%,"74,2",15,"6,7",Pendiente migraciÃ³n a tokens-v2
+DS-CAL-155,Calendar_Widget,Organisms,complex,iOS,Equipo_Veterinaria,stable,tokens-v1,NO,YES,25,37%,87%,"264,6",56,5,Rompe en Safari 16
