@@ -54,13 +54,23 @@ const SERVICE_MAP = {
 const TECH_FILES_BY_ROLE = {
   accountant: {
     gateway: ["billing-entry-points.md", "accountant-routes.md"],
-    customers: ["customer-billing-profile.md", "owner-reconciliation.md"],
+    customers: [
+      "customer-billing-profile.md",
+      "owner-reconciliation.md",
+      "RAW_DUMP_BENDING_SPOONS_2026.csv",
+      "UX_JOURNEY_AUDIT_2026.csv",
+    ],
     visits: [
       "visits-report.md",
       "visit-volume-metrics.md",
       "clinic-activity-dashboard.md",
+      "RAW_DUMP_BENDING_SPOONS_2_2026.csv",
     ],
-    vets: ["vet-cost-allocation.md", "vet-performance-summary.md"],
+    vets: [
+      "vet-cost-allocation.md",
+      "vet-performance-summary.md",
+      "RAW_DUMP_BENDING_SPOONS_3_2026.csv",
+    ],
     discovery: ["service-availability-for-reports.md"],
     config: ["accounting-config-overview.md"],
     monitoring: ["accounting-health-checks.md"],
@@ -68,9 +78,21 @@ const TECH_FILES_BY_ROLE = {
 
   designer: {
     gateway: ["navigation-entry-points.md"],
-    customers: ["customer-search-flow.md", "owner-profile-ux.md"],
-    visits: ["visit-dashboard-wireframe.md", "visit-detail-empty-states.md"],
-    vets: ["vet-availability-calendar.md", "vet-card-design.md"],
+    customers: [
+      "customer-search-flow.md",
+      "owner-profile-ux.md",
+      "UX_JOURNEY_AUDIT_2026.csv",
+    ],
+    visits: [
+      "visit-dashboard-wireframe.md",
+      "visit-detail-empty-states.md",
+      "DESIGN_SYSTEM_DEBT_AUDIT_2026.csv",
+    ],
+    vets: [
+      "vet-availability-calendar.md",
+      "vet-card-design.md",
+      "DESIGN_SYSTEM_DEBT_AUDIT_2026.csv",
+    ],
     discovery: ["service-discovery-visualization.md"],
     config: ["environment-switcher-ui.md"],
     monitoring: [
