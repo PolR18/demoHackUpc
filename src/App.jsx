@@ -19,8 +19,8 @@ import {
 } from "lucide-react";
 import "./App.css";
 
-const GITHUB_BASE =
-  "https://github.com/PolR18/spring-petclinic-microservices-main/blob/main";
+const LOCAL_OPEN_SERVER = "http://localhost:3001/open";
+const GITHUB_BASE = " ";
 
 const ROLE_CONFIG = {
   accountant: {
@@ -52,73 +52,28 @@ const SERVICE_MAP = {
 
 const TECH_FILES_BY_ROLE = {
   accountant: {
-    gateway: [
-      "billing-entry-points.md",
-      "accountant-routes.md",
-    ],
+    gateway: ["billing-entry-points.md", "accountant-routes.md"],
+    customers: ["customer-billing-profile.md", "owner-reconciliation.md"],
+    visits: ["visits-report.md", "visit-volume-metrics.md", "clinic-activity-dashboard.md"],
+    vets: ["vet-cost-allocation.md", "vet-performance-summary.md"],
+    discovery: ["service-availability-for-reports.md"],
+    config: ["accounting-config-overview.md"],
+    monitoring: ["accounting-health-checks.md"],
+  },
 
-    customers: [
-      "customer-billing-profile.md",
-      "owner-reconciliation.md",
-    ],
-
-    visits: [
-      "visits-report.md",
-      "visit-volume-metrics.md",
-      "clinic-activity-dashboard.md",
-    ],
-
-    vets: [
-      "vet-cost-allocation.md",
-      "vet-performance-summary.md",
-    ],
-
-    discovery: [
-      "service-availability-for-reports.md",
-    ],
-
-    config: [
-      "accounting-config-overview.md",
-    ],
-
-    monitoring: [
-      "accounting-health-checks.md",
-    ],
   designer: {
-    gateway: [
-      "navigation-entry-points.md",
-    ],
-
-    customers: [
-      "customer-search-flow.md",
-      "owner-profile-ux.md",
-    ],
-
-    visits: [
-      "visit-dashboard-wireframe.md",
-      "visit-detail-empty-states.md",
-    ],
-
-    vets: [
-      "vet-availability-calendar.md",
-      "vet-card-design.md",
-    ],
-
-    discovery: [
-      "service-discovery-visualization.md",
-    ],
-
-    config: [
-      "environment-switcher-ui.md",
-    ],
-
+    gateway: ["navigation-entry-points.md"],
+    customers: ["customer-search-flow.md", "owner-profile-ux.md"],
+    visits: ["visit-dashboard-wireframe.md", "visit-detail-empty-states.md"],
+    vets: ["vet-availability-calendar.md", "vet-card-design.md"],
+    discovery: ["service-discovery-visualization.md"],
+    config: ["environment-switcher-ui.md"],
     monitoring: [
       "navigation-entry-points.md",
       "service-status-ui.md",
       "system-map-ux.md",
     ],
   },
-},
 };
 
 const DISTRICTS = {
@@ -442,42 +397,46 @@ export default function App() {
     }
   };
 
-  const getTechFileUrl = (districtId, currentRole, file) => {
-    const serviceFolder = SERVICE_MAP[districtId];
+const getTechFilePath = (districtId, file) => {
+  const serviceFolder = SERVICE_MAP[districtId];
 
-    if (!serviceFolder) {
-      return `${GITHUB_BASE}/${file}`;
-    }
+  if (!serviceFolder) {
+    return file;
+  }
 
-    return `${GITHUB_BASE}/${serviceFolder}/${file}`;
-  };
+  return `${serviceFolder}/${file}`;
+};
 
-  const openTechFiles = () => {
-    if (!selectedDistrict || !role) {
-      addLog("Select a persona and a district first.");
-      return;
-    }
+const openLocalFile = (relativePath, index = 0) => {
+  const url = `${LOCAL_OPEN_SERVER}?path=${encodeURIComponent(relativePath)}`;
 
-    const districtId = selectedDistrict.id;
-    const files = TECH_FILES_BY_ROLE[role]?.[districtId] || [];
+  setTimeout(() => {
+    window.open(url, "_blank");
+  }, index * 250);
+};
 
-    if (files.length === 0) {
-      addLog(
-        `No ${ROLE_CONFIG[role].label} files found for ${selectedDistrict.title}.`
-      );
-      return;
-    }
+const openTechFiles = () => {
+  if (!selectedDistrict || !role) {
+    addLog("Select a persona and a district first.");
+    return;
+  }
 
-    files.forEach((file) => {
-      const url = getTechFileUrl(districtId, role, file);
-      window.open(url, "_blank", "noopener,noreferrer");
-      addLog(`Opening ${file}`);
-    });
+  const districtId = selectedDistrict.id;
+  const files = TECH_FILES_BY_ROLE[role]?.[districtId] || [];
 
+  if (files.length === 0) {
     addLog(
-      `Opened ${files.length} ${ROLE_CONFIG[role].label} files for ${selectedDistrict.title}.`
+      `No ${ROLE_CONFIG[role].label} files found for ${selectedDistrict.title}.`
     );
-  };
+    return;
+  }
+
+  files.forEach((file, index) => {
+    const localPath = getTechFilePath(districtId, file);
+    openLocalFile(localPath, index);
+    addLog(`Opening local file: ${localPath}`);
+  });
+};
 
   const runAgent = (districtId) => {
     if (!role) {
