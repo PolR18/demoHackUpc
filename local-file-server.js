@@ -13,7 +13,8 @@ app.use(cors());
 app.use(express.json());
 
 function safeAbsolutePath(relativePath) {
-  const absolutePath = path.resolve(BASE_PATH, relativePath);
+  const fileName = path.basename(relativePath);
+  const absolutePath = path.resolve(BASE_PATH, fileName);
 
   if (!absolutePath.startsWith(BASE_PATH)) {
     throw new Error("Invalid path");
@@ -26,6 +27,28 @@ function safeAbsolutePath(relativePath) {
   return absolutePath;
 }
 
+function quotePath(p) {
+  return `"${p.replaceAll('"', '\\"')}"`;
+}
+
+function runCommand(command) {
+  console.log("Running command:", command);
+
+  exec(command, (error, stdout, stderr) => {
+    if (error) {
+      console.error("Command error:", error.message);
+    }
+
+    if (stderr) {
+      console.error("Command stderr:", stderr);
+    }
+
+    if (stdout) {
+      console.log("Command stdout:", stdout);
+    }
+  });
+}
+
 app.post("/open-many", (req, res) => {
   const paths = req.body.paths;
 
@@ -36,25 +59,38 @@ app.post("/open-many", (req, res) => {
   try {
     const absolutePaths = paths.map(safeAbsolutePath);
 
-    const command = `open ${absolutePaths
-      .map((p) => `"${p.replaceAll('"', '\\"')}"`)
-      .join(" ")}`;
+    const csvFiles = absolutePaths.filter((p) =>
+      p.toLowerCase().endsWith(".csv")
+    );
 
-    exec(command, (error) => {
-      if (error) {
-        return res.status(500).json({ error: error.message });
-      }
+    const otherFiles = absolutePaths.filter(
+      (p) => !p.toLowerCase().endsWith(".csv")
+    );
 
-      res.json({
-        ok: true,
-        opened: absolutePaths,
-      });
+    console.log("Opening:", absolutePaths);
+
+    if (otherFiles.length > 0) {
+      runCommand(
+        `open -a "Visual Studio Code" ${otherFiles.map(quotePath).join(" ")}`
+      );
+    }
+
+    if (csvFiles.length > 0) {
+      runCommand(
+        `open -a "Numbers" ${csvFiles.map(quotePath).join(" ")}`
+      );
+    }
+
+    res.json({
+      ok: true,
+      opened: absolutePaths,
     });
   } catch (error) {
+    console.error("Open error:", error.message);
     res.status(400).json({ error: error.message });
   }
 });
 
 app.listen(PORT, () => {
-  console.log(`Local file server running on http://localhost:${PORT}`);
+  console.log(`🚀 Local file server running on http://localhost:${PORT}`);
 });
