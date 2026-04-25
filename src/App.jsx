@@ -14,6 +14,8 @@ import {
   UserRound,
   BriefcaseBusiness,
   HelpCircle,
+  ChevronsLeft,
+  ChevronsRight,
 } from "lucide-react";
 import "./App.css";
 
@@ -424,6 +426,7 @@ export default function App() {
     "Choose a persona to start.",
   ]);
   const [isRunning, setIsRunning] = useState(false);
+  const [leftCollapsed, setLeftCollapsed] = useState(false);
 
   const addLog = (text) => setLogs((prev) => [...prev, text]);
 
@@ -530,20 +533,26 @@ export default function App() {
   };
 
   return (
-    <div className="app">
-      <aside className="sidebar">
+    <div className={`app ${leftCollapsed ? "left-collapsed" : ""}`}>
+      <aside className={`sidebar ${leftCollapsed ? "collapsed" : ""}`}>
         <div className="brand">
-          <div className="brand-icon">
-            <Sparkles size={24} />
-          </div>
-          <div>
-            <h1>ContextMap</h1>
-            <p>Role-aware onboarding agents</p>
-          </div>
+          {!leftCollapsed && (
+            <div>
+              <h1>Spring Petclinic Microservices Map</h1>
+              <p>Click a microservice to translate for your role</p>
+            </div>
+          )}
+          <button 
+            className={`collapse-handle ${leftCollapsed ? "expanded" : ""}`} 
+            onClick={() => setLeftCollapsed(!leftCollapsed)}
+            title={leftCollapsed ? "Expand sidebar" : "Collapse sidebar"}
+          >
+            {leftCollapsed ? <ChevronsRight size={18} /> : <ChevronsLeft size={18} />}
+          </button>
         </div>
 
         <div className="section">
-          <h2>Choose persona</h2>
+          {!leftCollapsed && <h2>Choose persona</h2>}
 
           <div className="role-list">
             {Object.entries(ROLE_CONFIG).map(([key, value]) => {
@@ -554,7 +563,6 @@ export default function App() {
                 <button
                   key={key}
                   className={`role-card ${active ? "active" : ""}`}
-                  style={{ borderColor: active ? value.color : "transparent" }}
                   onClick={() => {
                     setRole(key);
                     setLogs([
@@ -563,49 +571,29 @@ export default function App() {
                       "Click a microservice on the map.",
                     ]);
                   }}
+                  title={leftCollapsed ? value.label : ""}
                 >
-                  <div className="role-icon" style={{ background: value.color }}>
-                    <Icon size={20} />
+                  <div className="role-icon" style={{ 
+                    background: "transparent",
+                    border: "none"
+                  }}>
+                    <Icon size={20} color={value.color} />
                   </div>
-                  <div>
-                    <strong>{value.name}</strong>
-                    <span>{value.label}</span>
-                  </div>
+                  {!leftCollapsed && (
+                    <div>
+                      <strong>{value.name}</strong>
+                      <span>{value.label}</span>
+                    </div>
+                  )}
                 </button>
               );
             })}
           </div>
         </div>
 
-        <div className="pitch-box">
-          <UserRound size={18} />
-          <p>
-            Same repository. Same microservice. Different onboarding depending
-            on the user.
-          </p>
-        </div>
       </aside>
 
       <main className="map-area">
-        <div className="topbar">
-          <div>
-            <h2>Spring Petclinic Microservices Map</h2>
-            <p>
-              Click a microservice and the agent translates it for the selected
-              role.
-            </p>
-          </div>
-
-          {role && (
-            <div
-              className="current-role"
-              style={{ borderColor: ROLE_CONFIG[role].color }}
-            >
-              Active persona: <strong>{ROLE_CONFIG[role].label}</strong>
-            </div>
-          )}
-        </div>
-
         <div className="flow-wrapper">
           <ReactFlow
             nodes={initialNodes}
@@ -613,9 +601,10 @@ export default function App() {
             nodeTypes={nodeTypes}
             onNodeClick={onNodeClick}
             fitView
+            fitViewOptions={{ padding: 1.2 }}
           >
             <Background gap={24} size={1} />
-            <Controls />
+            <Controls orientation="horizontal" position="bottom-center" />
           </ReactFlow>
         </div>
       </main>
